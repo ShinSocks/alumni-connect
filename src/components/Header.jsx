@@ -13,7 +13,12 @@ export default function Header() {
             </div>
             <div>
                 <form className = "px-10">
-                    <input type = "text" className = "bg-slate-500 rounded-sm placeholder-white px-3 w-96 h-9" placeholder = "Search"></input>
+                    <select  className = "bg-slate-500 rounded-l-sm px-3 w-25 h-9 text-slate-50 cursor-pointer">
+                        <option>Region</option>
+                        <option>Universities</option>
+                        <option>Students</option>
+                    </select>
+                    <input type = "text" className = "bg-slate-500 rounded-r-sm placeholder-white px-3 w-96 h-9" placeholder = "Search"></input>
                     <input type = "submit" className = "text-slate-50 ml-3 cursor-pointer hover:text-slate-500" ></input>
                 </form>
             </div>

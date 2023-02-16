@@ -1,22 +1,53 @@
+import React from "react";
+import OAuth from "../components/OAuth";
+import {AiFillEyeInvisible, AiFillEye} from "react-icons/ai"
+import {useNavigate} from "react-router-dom"
+
 export default function SignIn() {
+  const navigate = useNavigate();
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [formData, setFormData] = React.useState({
+    email: "",
+    password: ""
+  });
+
+  const {email, password} = formData;
+  function onChange(e){
+    setFormData((prevState)=>({
+      ...prevState,
+      [e.target.id]: e.target.value
+    }));
+  }
+
   return (
-    <div className = "bg-slate-500 w-[27%] m-auto mt-48">
-      <div>
-        <img src = {require('../images/UCC.png')} alt="UCC Logo" className = "h-16 m-auto py-2"/>
+    <div className = "bg-slate-200 min-h-screen relative">
+      <div className = "bg-slate-500 w-[28%] ml-[36.5%] mt-48 absolute">
+        <div>
+          <img src = {require('../images/UCC.png')} alt="UCC Logo" className = "h-16 m-auto py-2"/>
+        </div>
+        <div className = "bg-slate-400 h-48">
+        
+          <div class="flex flex-col items-center justify-center">
+              <form className = "mt-5">
+                  <input  type="email" placeholder="Email address" id="email" value={email} onChange={onChange} class="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-200  mb-2 active: shadow-sm" />
+                  {showPassword ? (<AiFillEyeInvisible className = "absolute text-xl cursor-pointer ml-[75%] mt-3" onClick={()=>setShowPassword((prevState)=>!prevState)}/>): (<AiFillEye className = "absolute text-xl cursor-pointer ml-[75%] mt-3" onClick={()=>setShowPassword((prevState)=>!prevState)}/>)}
+                  <input  type={showPassword ? "text" : "password"} placeholder="Password" id="password" value={password} onChange={onChange} class="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-200  mb-2 active: shadow-sm" />
+                  <button type="submit"class="bg-slate-800 w-[20%] h-10 rounded text-slate-50 hover:bg-slate-900 hover:shadow-lg active: shadow-lg transition duration-150 ease-in-out mt-[2%]">
+                      Login
+                  </button>
+              </form> 
+              <div class="bg-slate-200 w-[18%] h-10 rounded text-slate-50 pl-[5.8%] pt-1.5 absolute mt-[24%] mr-[27%] hover:bg-slate-300 cursor-pointer hover:shadow-lg active: shadow-lg transition duration-150 ease-in-out"><OAuth/></div>
+              <div className = "absolute ml-[55%] mt-[19%] text-slate-black hover:text-slate-50 cursor-pointer transition duration-150 ease-in-out" onClick = {()=>navigate("/forgot-password")}>
+                Forgot Password?
+              </div>
+          </div>
+        </div>
       </div>
-      <div className = "bg-slate-400 h-48 pl-2 pt-3">
-        Email Address
-        <form>
-          <ul>
-            <li><input type = "text" placeholder="Email"></input></li>
-            <li><input type = "text" placeholder="Password"></input></li>
-            <li><input type = "submit"></input></li>
-          </ul>
-          
-          
-          
-        </form>
+      <div className = "absolute ml-[43.8%] mt-[25%] flex">
+        Don't have and account? 
+        <div className = "ml-2 cursor-pointer text-sky-600 hover:text-sky-900 transition duration-150 ease-in-out" onClick={()=>navigate("/sign-up")}>Register</div>
       </div>
     </div>
+    
   )
 }
