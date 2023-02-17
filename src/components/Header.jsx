@@ -2,7 +2,7 @@ import {useNavigate} from "react-router-dom"
 export default function Header() {
   const navigate = useNavigate();
   return (
-    <div className = "bg-slate-800 border-b shadow-2xl sticky top-0">
+    <div className = "bg-slate-800 border-b shadow-2xl sticky top-0 z-50">
         <header className="flex justify-between items-center px-5 py-2 max-w-6x1 mx-auto">
             <div>
                 <ul className="flex space-x-3">
