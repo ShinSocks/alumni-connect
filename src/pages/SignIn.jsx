@@ -30,10 +30,10 @@ export default function SignIn() {
           <div class="flex flex-col items-center justify-center">
               <form className = "mt-5">
                   <AiOutlineMail className="absolute mt-[2.5%] ml-2 opacity-40"/>
-                  <input  type="email" placeholder="   Email" id="email" value={email} onChange={onChange} class="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-200  mb-2 active: shadow-sm" />
-                  {showPassword ? (<AiFillEyeInvisible className = "absolute text-xl cursor-pointer ml-[75%] mt-3" onClick={()=>setShowPassword((prevState)=>!prevState)}/>): (<AiFillEye className = "absolute text-xl cursor-pointer ml-[75%] mt-3" onClick={()=>setShowPassword((prevState)=>!prevState)}/>)}
+                  <input  type="email" placeholder="Email" id="email" value={email} onChange={onChange} class="text-sm text-gray-base w-full mr-3 py-5 px-7 h-2 border border-gray-200  mb-2 active: shadow-sm" />
+                  {showPassword ? (<AiFillEyeInvisible className = "absolute text-xl cursor-pointer ml-[85.5%] mt-3" onClick={()=>setShowPassword((prevState)=>!prevState)}/>): (<AiFillEye className = "absolute text-xl cursor-pointer ml-[85.5%] mt-3" onClick={()=>setShowPassword((prevState)=>!prevState)}/>)}
                   <AiOutlineLock className="absolute mt-[2.5%] ml-2 opacity-40"/>
-                  <input  type={showPassword ? "text" : "password"} placeholder="   Password" id="password" value={password} onChange={onChange} class="text-sm text-gray-base w-full mr-3 py-5 px-4 h-2 border border-gray-200  mb-2 active: shadow-sm" />
+                  <input  type={showPassword ? "text" : "password"} placeholder="Password" id="password" value={password} onChange={onChange} class="text-sm text-gray-base w-full mr-3 py-5 px-7 h-2 border border-gray-200  mb-2 active: shadow-sm" />
                   <button type="submit"class="bg-slate-800 w-[20%] h-10 rounded text-slate-50 hover:bg-slate-900 hover:shadow-lg active: shadow-lg transition duration-150 ease-in-out mt-[2%]">
                       Login
                   </button>
