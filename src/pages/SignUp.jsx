@@ -38,8 +38,8 @@ export default function SignUp() {
   }
 
   return (
-    <div className = "bg-slate-200 min-h-screen relative">
-      <div className = "bg-slate-500 w-[28%] ml-[36.5%] mt-48 absolute h-[40%] active: shadow-lg ">
+    <div className = "bg-slate-200 min-h-screen relative flex items-center justify-center h-screen">
+      <div className = "bg-slate-500 w-[14cm] top-[20%] absolute h-[10cm] active: shadow-lg ">
         <div>
           <img src = {require('../images/UCC.png')} alt="UCC Logo" className = "h-16 m-auto py-2"/>
         </div>
