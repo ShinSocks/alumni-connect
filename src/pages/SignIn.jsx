@@ -20,8 +20,8 @@ export default function SignIn() {
   }
 
   return (
-    <div className = "bg-slate-200 min-h-screen relative flex items-center justify-center h-screen">
-      <div className = "bg-slate-500 w-[14cm] absolute top-[20%] ">
+    <div className = "bg-slate-200 h-[93.7vh] relative flex items-center justify-center">
+      <div className = "bg-slate-500 w-[14cm] absolute top-[15%] ">
         <div>
           <img src = {require('../images/UCC.png')} alt="UCC Logo" className = "h-16 m-auto py-2"/>
         </div>
@@ -43,7 +43,7 @@ export default function SignIn() {
               </div>
           </div>
         </div>
-        <div className = "bg-slate-200 py-6 w-[100%]">
+        <div className = "bg-slate-200 pt-6 w-[100%]">
           <div className = "flex items-center justify-center">
             Don't have and account? 
           <div className = "ml-2 cursor-pointer text-sky-500 hover:text-slate-800 transition duration-150 ease-in-out" onClick={()=>navigate("/sign-up")}>Register</div>

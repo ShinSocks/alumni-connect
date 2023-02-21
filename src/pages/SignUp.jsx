@@ -1,10 +1,11 @@
 import React from "react";
 import {db} from "../firebase.js"
-import {getAuth, createUserWithEmailAndPassword} from "firebase/auth"
+import {getAuth, createUserWithEmailAndPassword, updateProfile} from "firebase/auth"
 import {useNavigate} from "react-router-dom"
 import {BsPerson} from "react-icons/bs"
 import {SiOpenaccess} from "react-icons/si"
 import {AiOutlineMail, AiOutlineLock, AiFillEye, AiFillEyeInvisible} from 'react-icons/ai'
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ export default function SignUp() {
     accessCode: ""
   });
 
-  const {firstName, email, password, accessCode} = formData;
+  const {name, email, password, accessCode} = formData;
   function onChange(e){
     setFormData((prevState)=>({
       ...prevState,
@@ -24,22 +25,29 @@ export default function SignUp() {
     }));
   }
 
-  function onSubmit(e){
+  async function onSubmit(e){
     e.preventDefault()
 
     try{
-      const auth = getAuth
-      const userCredential = createUserWithEmailAndPassword(auth, email, password)
+      const auth = getAuth();
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      
       const user = userCredential.user
-      console.log(user)
+      const formDataCopy = {...formData}
+      delete formDataCopy.password
+      formDataCopy.timestamp = serverTimestamp();
+
+      await setDoc(doc(db, "users", user.uid), formDataCopy)
+      navigate("/")
+      console.log(user);
     }catch(error){
       console.log(error)
     }
   }
 
   return (
-    <div className = "bg-slate-200 min-h-screen relative flex items-center justify-center h-screen">
-      <div className = "bg-slate-500 w-[14cm] top-[20%] absolute h-[10cm] active: shadow-lg ">
+    <div className = "bg-slate-200 h-[93.7vh] relative flex items-center justify-center">
+      <div className = "bg-slate-500 w-[14cm] top-[15%] absolute h-[10cm] active: shadow-lg ">
         <div>
           <img src = {require('../images/UCC.png')} alt="UCC Logo" className = "h-16 m-auto py-2"/>
         </div>
@@ -49,7 +57,7 @@ export default function SignUp() {
                 <ul className = "w-[100%]">
                   <li className = "w-[100%]"> 
                     <BsPerson className="absolute mt-[2.5%] ml-12 opacity-40"/>
-                    <input  type="firstName" placeholder="Name" id="firstName" value={firstName} onChange={onChange} class="text-sm text-gray-base w-[84%] ml-[7.8%] py-5 px-7 h-2 border border-gray-200  mb-4 active: shadow-sm"/>
+                    <input  type="name" placeholder="name" id="name" value={name} onChange={onChange} class="text-sm text-gray-base w-[84%] ml-[7.8%] py-5 px-7 h-2 border border-gray-200  mb-4 active: shadow-sm"/>
                   </li>
                   <li>
                     <AiOutlineMail className="absolute mt-[2.5%] ml-12 opacity-40"/>
