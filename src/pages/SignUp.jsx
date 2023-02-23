@@ -1,11 +1,13 @@
 import React from "react";
 import {db} from "../firebase.js"
-import {getAuth, createUserWithEmailAndPassword, updateProfile} from "firebase/auth"
+import {getAuth, createUserWithEmailAndPassword} from "firebase/auth"
 import {useNavigate} from "react-router-dom"
 import {BsPerson} from "react-icons/bs"
 import {SiOpenaccess} from "react-icons/si"
 import {AiOutlineMail, AiOutlineLock, AiFillEye, AiFillEyeInvisible} from 'react-icons/ai'
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import {toast} from "react-toastify";
+
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -38,10 +40,11 @@ export default function SignUp() {
       formDataCopy.timestamp = serverTimestamp();
 
       await setDoc(doc(db, "users", user.uid), formDataCopy)
+      toast.success("Sign up was successful")
       navigate("/")
       console.log(user);
     }catch(error){
-      console.log(error)
+      toast.error("Something went wrong")
     }
   }
 
