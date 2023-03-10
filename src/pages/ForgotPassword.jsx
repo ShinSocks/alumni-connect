@@ -4,6 +4,8 @@ import {useNavigate} from "react-router-dom"
 
 
 import {AiOutlineMail} from 'react-icons/ai'
+import { sendPasswordResetEmail, getAuth } from "firebase/auth";
+import { toast } from "react-toastify";
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -19,6 +21,18 @@ export default function SignUp() {
     }));
   }
 
+  async function onSubmit(e){
+    e.preventDefault()
+    try {
+      const auth = getAuth()
+      await sendPasswordResetEmail(auth, email)
+      toast.success("Email was sent");
+
+    }catch(error){
+      toast.error("Email does not exist")
+      console.log(error)
+    }
+  }
   return (
     <div className = "bg-slate-200 relative h-[93.7vh] flex items-center justify-center">
       <div className = "bg-slate-500 w-[14cm] top-[15%] absolute h-[5cm] active: shadow-lg ">
@@ -27,7 +41,7 @@ export default function SignUp() {
         </div>
         <div className = "bg-slate-400 h-[100%] pt-[4%]">
           <div class="flex flex-col items-center justify-center">
-              <form className = "mt-5 w-[100%]">
+              <form className = "mt-5 w-[100%]" onSubmit = {onSubmit}>
                 <ul className = "w-[100%]">
                   <li>
                     <AiOutlineMail className="absolute mt-[2.5%] ml-12 opacity-40"/>

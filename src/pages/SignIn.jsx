@@ -2,6 +2,8 @@ import React from "react";
 import OAuth from "../components/OAuth";
 import {AiFillEyeInvisible, AiFillEye, AiOutlineMail, AiOutlineLock} from "react-icons/ai"
 import {useNavigate} from "react-router-dom"
+import {signInWithEmailAndPassword, auth, getAuth} from "firebase/auth";
+import {toast} from "react-toastify";
 
 export default function SignIn() {
   const navigate = useNavigate();
@@ -19,6 +21,21 @@ export default function SignIn() {
     }));
   }
 
+  async function onSubmit(e){
+    e.preventDefault()
+    try{
+      const auth = getAuth();
+      const userCredential = await signInWithEmailAndPassword(auth, email, password)
+      if(userCredential.user){
+        navigate("/")
+        toast.success("Sign in successful")
+      }
+
+    } catch(error){
+      toast.error("Email or Password incorrect")
+    }
+  }
+
   return (
     <div className = "bg-slate-200 h-[93.7vh] relative flex items-center justify-center">
       <div className = "bg-slate-500 w-[14cm] absolute top-[15%] ">
@@ -27,7 +44,7 @@ export default function SignIn() {
         </div>
         <div className = "bg-slate-400 h-48 active: shadow-lg">
           <div class="flex flex-col items-center justify-center">
-              <form className = "mt-5">
+              <form className = "mt-5" onSubmit={onSubmit}>
                   <AiOutlineMail className="absolute mt-[2.5%] ml-2 opacity-40"/>
                   <input  type="email" placeholder="Email" id="email" value={email} onChange={onChange} class="text-sm text-gray-base w-full mr-3 py-5 px-7 h-2 border border-gray-200  mb-2 active: shadow-sm" />
                   {showPassword ? (<AiFillEyeInvisible className = "absolute text-xl cursor-pointer ml-[85%] mt-3" onClick={()=>setShowPassword((prevState)=>!prevState)}/>): (<AiFillEye className = "absolute text-xl cursor-pointer ml-[85%] mt-3" onClick={()=>setShowPassword((prevState)=>!prevState)}/>)}
