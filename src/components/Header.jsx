@@ -24,7 +24,7 @@ export default function Header() {
       }
 
       else if(searchType === "student"){
-        navigate("/profile")
+        navigate("/search-student")
       }
 
     } catch(error){

@@ -7,6 +7,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import Schools from "./pages/Schools";
 import Header from "./components/Header";
 import ProfilePage from "./pages/ProfilePage";
+import SearchStudent from "./pages/SearchStudent";
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/forgot-password" element = {<ForgotPassword/>}/> 
           <Route path="/schools" element = {<Schools/>}/> 
           <Route path="/profile" element = {<ProfilePage/>}/> 
+          <Route path="/search-student" element = {<SearchStudent/>}/> 
         </Routes>
       </Router>
       <ToastContainer
